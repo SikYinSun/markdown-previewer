@@ -1,33 +1,36 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import styled from "styled-components"
+import Header from './components/Header'
+import MarkdownGuide from './components/MarkdownGuide'
+import MarkdownInput from './components/MarkdownInput'
+import MarkdownOutput from './components/MarkdownOutput'
+
+
+const InOutContainer = styled.div `
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 5%;
+  height: calc(100vh - 58.5px);
+`;
 
 function App() {
-  const [count, setCount] = useState(0)
+  
+  const [markdown, setMarkdown] = useState(`# Hello World!`);
+  const [showGuide, setShowGuide] = useState(false);
+
+  const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setMarkdown(event.target.value);
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {/* <Header onToggleGuide={() => {setShowGuide((showGuide) => !showGuide)}}/> */}
+      <Header onToggleGuide={() => {setShowGuide(!showGuide)}}/>
+      { showGuide && <MarkdownGuide />}
+      <InOutContainer>
+        <MarkdownInput value={markdown} onChange={handleChange}/>
+        <MarkdownOutput markdown={markdown} />
+      </InOutContainer>
     </>
   )
 }
