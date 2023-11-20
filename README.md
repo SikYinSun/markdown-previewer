@@ -51,7 +51,7 @@ Start the server
 
 Now you're ready to preview and edit markdown content effortlessly!
 
-Usage
+## Usage
 
 1. Open the application in your web browser.
 
